@@ -341,7 +341,7 @@ ul#nav li.current a { color: #F06000; }
     -webkit-animation: jquery 2s ease;
 }
 .react {
-    width: 5%;
+    width: 10%;
     -moz-animation: jquery 2s ease;
     -webkit-animation: jquery 2s ease;
 }
@@ -361,6 +361,16 @@ ul#nav li.current a { color: #F06000; }
     -webkit-animation: illustrator 2s ease;
 }
 .wordpress {
+    width: 30%;
+    -moz-animation: wordpress 2s ease;
+    -webkit-animation: wordpress 2s ease;
+}
+.afterEffects {
+    width: 10%;
+    -moz-animation: wordpress 2s ease;
+    -webkit-animation: wordpress 2s ease;
+}
+.premierePro {
     width: 20%;
     -moz-animation: wordpress 2s ease;
     -webkit-animation: wordpress 2s ease;
