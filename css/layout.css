@@ -321,17 +321,17 @@ ul#nav li.current a { color: #F06000; }
 
 /***  Skills  ***/
 .html5 {
-    width: 90%;
+    width: 95%;
     -moz-animation: html5 2s ease;
     -webkit-animation: html5 2s ease;
 }
 .css {
-    width: 90%;
+    width: 95%;
     -moz-animation: css 2s ease;
     -webkit-animation: css 2s ease;
 }
 .javascript {
-    width: 70%;
+    width: 75%;
     -moz-animation: jquery 2s ease;
     -webkit-animation: jquery 2s ease;
 }
@@ -341,7 +341,7 @@ ul#nav li.current a { color: #F06000; }
     -webkit-animation: jquery 2s ease;
 }
 .react {
-    width: 10%;
+    width: 15%;
     -moz-animation: jquery 2s ease;
     -webkit-animation: jquery 2s ease;
 }
