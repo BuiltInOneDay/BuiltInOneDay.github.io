@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import createSlug from "../lib/createSlug"
+
+const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const last_posts = posts.slice(0, 3);
+---
+
+<BaseLayout sideBarActiveItemID="home">
+  <div class="pb-12 mt-5">
+    <div class="text-xl py-1">Hey there 👋</div>
+    <div class="text-5xl font-bold">I'm Anthony Ellsworth</div>
+    <div class="text-3xl py-3 font-bold">Web Developer and Entrepreneur</div>
+    <div class="py-2">
+      <text class="text-lg">
+        Front-End Developer with 15+ years of experience, leveraging expertise in HTML, CSS, and JavaScript to deliver
+user-centric web experiences. Adept at responsive design and cross-browser compatibility, ensuring seamless
+functionality across devices and platforms. Passionate about crafting engaging and delightful user interfaces for
+websites and applications.
+      </text>
+    </div>
+    <div class="mt-8">
+      <a class="btn" href="https://twitter.com/HampsteadStudio" target="_blank"> Let's connect!</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+  </div>
+
+  <HorizontalCard
+    title="Astrofy Portfolio"
+    img="/post_img.webp"
+    desc="You are on it.  This is my quick and simple portfolio using Astro. I am using the template Astrofy to help test learn React, Astro, AWS, Github and ploi.io"
+    url="#"
+    badge="NEW"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="ePro Inc"
+    img="/post_img_epro.jpg"
+    desc="This website is built in craftCMS 3. The site was built and designed by another agency but asked me to take over.  I help them with updates and maintance. "
+    url="https://www.eproinc.com/"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="Nissan eBrochures 2024"
+    img="/post_img_nissan.jpg"
+    desc="Help development components for the new 2024 Nissan eBrochures. They are currently in the process of rolling them out to each model. Here is the 2024 Nissan Leaf eBrochure."
+    url="https://www.nissanusa.com/interactivebrochures/electric-hybrid-cars/leaf/leaf-electric-driving/index.html"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="BMSA Group"
+    img="/post_img_bmsa.jpg"
+    desc="Took over this website to help keep it running and updated. Planning to redesign and rebuild the site in the future."
+    url="https://www.bmsagroup.com/"
+  />
+
+  <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  </div>
+
+  {
+    last_posts.map((post) => (
+      <>
+        <HorizontalCard
+          title={post.data.title}
+          img={post.data.heroImage}
+          desc={post.data.description}
+          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          target="_self"
+          badge={post.data.badge}
+        />
+        <div class="divider my-0" />
+      </>
+    ))
+  }
+
+</BaseLayout>

@@ -1,6 +1,7 @@
 # build output
-src/
+
 .cache
+
 # dependencies
 node_modules/
 
