@@ -1,5 +1,5 @@
 # build output
-dist/
+src/
 .cache
 # dependencies
 node_modules/
