@@ -27,3 +27,6 @@ Now that I had my payment methods, I can move onto the payment total dialogue pa
 I'd like to focus on further prototyping and implementing the remaining payment methods on the page, allowing users to select and interact with them. Since each payment method requires different forms and input fields compared to credit card payments, the page will dynamically adjust to display the appropriate layout for each option.
 - Prototyping: I plan to create a prototype to test the user flow and interactions.
 - Payment method variations: I'll design specific form layouts for each payment method, as different methods require unique information.
+
+#### Protype Testing
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/s4I9JM3Kee0vZVuzzqtvmY/Payment-Dialog---Europe?page-id=0%3A1&node-id=6-358&node-type=frame&viewport=1282%2C794%2C0.48&scaling=scale-down&content-scaling=responsive&starting-point-node-id=6%3A358&embed-host=share" allowfullscreen></iframe>
