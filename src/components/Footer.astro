@@ -7,4 +7,64 @@ const today = new Date();
     &copy; {today.getFullYear()} Anthony Ellsworth
   </div>
 </footer>
-<style></style>
+<script>
+  const emojiContainer = document.getElementById('emoji-container');
+  const emojis = ["👻","🎃"]; // Add more emojis as needed
+  
+  function getRandomEmoji() {
+    const randomIndex = Math.floor(Math.random() * emojis.length);
+    return emojis[randomIndex];
+  }
+
+  function placeRandomEmoji() {
+    // const emoji = getRandomEmoji();
+    // const emojiElement = document.createElement("span");
+    // emojiElement.textContent = emoji;
+
+    // const viewportWidth = window.innerWidth;
+    // const viewportHeight = window.innerHeight;
+
+    // const x = Math.random() * (viewportWidth - 20); //Adjust 20 for empji
+    // const y = Math.random() * (viewportHeight - 20);
+
+    // emojiElement.style.position = "absolute";
+    // emojiElement.style.left = x + "px";
+    // emojiElement.style.top = y + "px";
+
+    const emoji = document.createElement('div');
+    emoji.textContent = getRandomEmoji();
+    emoji.classList.add('emoji');
+
+    const x = Math.random() * (window.innerWidth - 50);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    emoji.style.left = `${x}px`;
+    emoji.style.top = `${y}px`;
+
+    // document.body.appendChild(emoji);
+    emojiContainer.appendChild(emoji);
+
+    animateEmoji(emoji);
+  }
+
+  function animateEmoji(emoji) {
+    const targetX = Math.random() * (window.innerWidth - 50);
+    const targetY = Math.random() * (window.innerHeight - 50);
+
+    emoji.animate([
+      { left: emoji.style.left, top: emoji.style.top },
+      { left: `${targetX}px`, top: `${targetY}px` }
+    ], {
+      duration: 3000 + Math.random() * 3000, // Random duration between 3 and 6 seconds
+      easing: 'ease-in-out',
+      iterations: Infinity,
+      direction: 'alternate' // Move back and forth
+    });
+  }
+
+  // Place 10 random emojis on the screen
+  for (let i = 0; i < 3; i++) {
+    placeRandomEmoji();
+  }
+  
+</script>
