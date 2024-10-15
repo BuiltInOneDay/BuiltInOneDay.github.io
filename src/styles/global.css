@@ -1,3 +1,9 @@
 .time-line-container>div:last-child .education__time>.education__line {
     display: none;
 }
+
+/* AE 10/14/24 */
+.time-line-container .experience__data ul{
+    list-style: disc;
+    padding-left: 1.1rem;
+}
