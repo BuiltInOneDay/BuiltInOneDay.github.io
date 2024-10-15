@@ -1,16 +1,32 @@
 ---
-title: "Demo Post 2"
-description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-pubDate: "Sep 11 2022"
-heroImage: "/post_img.webp"
+title: "UX/UI Payment Dialog for Europe"
+description: "Designed in Figma a payment dialog for Europe."
+pubDate: "Oct 7 2024"
+heroImage: "/post-img-payment-dialog-europe.webp"
+tags: ["UX/UI", "Figma", "Payment Dialog"]
+# badge: "Demo badge"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+Today, I decided to work on a UX design project in Figma. Using the website [Sharpen](https://sharpen.design/), I was prompted to create a payment dialog for Europe. This was a new challenge for me, as I've had limited experience designing for European markets.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+#### Challenges
+1. **Payment methods:** I researched popular payment methods in Europe and included these options: Credit Card (Visa/Mastercard), Debit Card, PayPal, SEPA Direct Debit, iDEAL (Netherlands), Bancontact (Belgium), and Bitcoin (as an additional option).
+2. **Sales Tax/VAT:** I encountered uncertainty regarding whether to include sales tax, VAT, or both. For now, I've included both, but I'll need to clarify this to ensure accuracy.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+#### Payment Methods
+For the first question, I had do some research on what payment methods are used.  After reading and searching around, I came to the conclusion with these five, Credit Card (Visa/Mastercard), Debit Card, PayPal, SEPA Direct Debit, iDEAL (Netherlands), Bancontact (Belgium) and added Bitcoin just a fun extra.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+![UX/UI Payment Methods for Europe - Anthony Ellsworth](/post-payment-method.webp)
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+#### Payment Total
+Now that I had my payment methods, I can move onto the payment total dialogue page.  This has more layout Variation in it as you need the credit cards name number dates then a promo code and tell the total on it. The main thing here was the Sale Tax / VAT challenge from before.  Unfortunately, I was not able to clarify or find out if it is just sales tax or VAT or both so I kind of just put both on there for now.
+
+![UX/UI Payment Total for Europe - Anthony Ellsworth](/post-payment-total.webp)
+
+#### Next steps
+I'd like to focus on further prototyping and implementing the remaining payment methods on the page, allowing users to select and interact with them. Since each payment method requires different forms and input fields compared to credit card payments, the page will dynamically adjust to display the appropriate layout for each option.
+- Prototyping: I plan to create a prototype to test the user flow and interactions.
+- Payment method variations: I'll design specific form layouts for each payment method, as different methods require unique information.
+
+#### Protype Testing
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/s4I9JM3Kee0vZVuzzqtvmY/Payment-Dialog---Europe?page-id=0%3A1&node-id=6-358&node-type=frame&viewport=1282%2C794%2C0.48&scaling=scale-down&content-scaling=responsive&starting-point-node-id=6%3A358&embed-host=share" allowfullscreen></iframe>
