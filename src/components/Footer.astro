@@ -8,15 +8,15 @@ const today = new Date();
   </div>
 </footer>
 <script>
-  const emojiContainer = document.getElementById('emoji-container');
-  const emojis = ["👻","🎃"]; // Add more emojis as needed
+  // const emojiContainer = document.getElementById('emoji-container');
+  // const emojis = ["👻","🎃"]; // Add more emojis as needed
   
-  function getRandomEmoji() {
+  /* function getRandomEmoji() {
     const randomIndex = Math.floor(Math.random() * emojis.length);
     return emojis[randomIndex];
-  }
+  } */
 
-  function placeRandomEmoji() {
+  /* function placeRandomEmoji() {
     // const emoji = getRandomEmoji();
     // const emojiElement = document.createElement("span");
     // emojiElement.textContent = emoji;
@@ -45,9 +45,9 @@ const today = new Date();
     emojiContainer.appendChild(emoji);
 
     animateEmoji(emoji);
-  }
+  } */
 
-  function animateEmoji(emoji) {
+  /* function animateEmoji(emoji) {
     const targetX = Math.random() * (window.innerWidth - 50);
     const targetY = Math.random() * (window.innerHeight - 50);
 
@@ -60,7 +60,7 @@ const today = new Date();
       iterations: Infinity,
       direction: 'alternate' // Move back and forth
     });
-  }
+  } */
 
   // Place 10 random emojis on the screen
   for (let i = 0; i < 3; i++) {
