@@ -37,3 +37,13 @@ const { title, description, image = '/social_img.webp', ogType = 'website' } = A
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Google tag (gtag.js) -->
+<script type="text/anthonyellswort.dev" src="https://www.googletagmanager.com/gtag/js?id=G-PPKZJ34604"></script>
+<script type="text/anthonyellswort.dev">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PPKZJ34604');
+</script>
