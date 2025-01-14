@@ -17,6 +17,7 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.4",
     "astro": "^5.1.1",
+    "baseline-status": "^1.0.10",
     "daisyui": "^4.12.13",
     "dayjs": "^1.11.13",
     "sharp": "^0.32.6",
