@@ -7,4 +7,4 @@ tags: ["tokio"]
 # badge: "Demo badge"
 ---
 
-Today is Day 0 for my profile and me.  Today I was laid off from a company that I have sent the last 12 years working at.  I am sad but hopefully that I will move on to some better.
+Today I was laid off from a company that I have spent the last 12 years working at. This news is undoubtedly sad, and it's natural to feel a range of emotions like disappointment, uncertainty, and even anger. However, I'm hopeful that this unexpected turn of events will lead me to something even better. This is a chance to reassess my priorities, explore new career paths, and discover opportunities that I may have missed before. I'm determined to use this time to grow, learn, and build a fulfilling future.
