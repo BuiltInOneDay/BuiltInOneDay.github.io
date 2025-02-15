@@ -23,7 +23,7 @@ Epro's previous redesign attempt wasn't gaining any engagement, leading to a sha
 - **Audience Analysis:** We discussed their target audience. What were their interests? What kind of email design would resonate with them?
 - **HubSpot Platform Audit:** Crucially, we investigated Epro's email marketing platform. This included reviewing their contact list management, segmentation, and deliverability settings. We suspected the "marketing contacts" issue was a key factor.
 
-[![Epro's original newsletter](/post-img-original-newsletter.jpg)](/original-epro-newsletter.png)
+[![Epro's original newsletter](/post-img-epro-newsletter-original.jpg)](/epro-newsletter-original.png)
 
 ##### 2. Define:
 
