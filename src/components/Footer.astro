@@ -4,11 +4,11 @@ const year = new Date().getFullYear()
 
 <footer class="footer footer-center block mb-5 pt-10">
   <div class="pb-2">
-    &copy; {year} Anthony Ellsworth
+    <p>&copy; <span id="footer-year">{year}</span> Anthony Ellsworth</p>
   </div>
 </footer>
 
 <!-- Backup for Server side date -->
-<script is:inline>
-	document.getElementById("footer-year").innerText = new Date().getFullYear;
-</script>
+<!-- <script is:inline data-astro-rerun>
+    document.getElementById("footer-year").innerText = new Date().getFullYear;
+</script> -->

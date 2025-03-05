@@ -1,12 +1,48 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+function getRandomStringFromArray(stringArray) {
+  if (!Array.isArray(stringArray) || stringArray.length === 0) {
+    return undefined; // Return undefined for empty or invalid input
+  }
+
+  const randomIndex = Math.floor(Math.random() * stringArray.length);
+  return stringArray[randomIndex];
+}
+
+const quoteSW = [
+  {
+    image: "/404-darth-vader.svg",
+    quote: "The Force is not strong with this page. It appears to have vanished."
+  },
+  {
+    image: "/404-bb-8.svg",
+    quote: "This is not the page you're looking for...",
+  },
+  {
+    image: "/404-death-star.svg",
+    quote: "It appears the Death Star has destroyed the page you requested. Try another target, pilot.",
+  },
+  {
+    image: "/404-millennium-falcon.svg",
+    quote: "The hyperdrive has failed. The page you seek is lost in hyperspace.",
+  },
+  {
+    image: "/404-chewbacca.svg",
+    quote: "Even a Wookiee couldn't find this page."
+  },
+]
+
+const randomQuote = getRandomStringFromArray(quoteSW);
 ---
 
 <BaseLayout title = "404: Not Found" includeSidebar={false}>
   <div class="text-center">
-    <h1 class="text-9xl font-bold mb-4">🏝</h1>
+    <!-- <h1 class="text-9xl font-bold mb-4">🏝</h1> -->
+    <img class="mb-4 w-52 m-auto" src={randomQuote.image} alt="">
     <h1 class="text-9xl font-bold mb-2">404</h1>
-    <h3 class="text-2xl">The page you're looking for couldn't be found.</h3>
+    <!-- <h3 class="text-2xl">The page you're looking for couldn't be found.</h3> -->
+    <h3 class="text-2xl">{randomQuote.quote}</h3>
     <a class="btn btn-accent mt-9" href="/">Home</a>
   </div>
 </BaseLayout>
