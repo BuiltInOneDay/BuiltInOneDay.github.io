@@ -1,0 +1,145 @@
+---
+title: "CSS align-content: Mastering Multi-Line Alignment in Flexbox & Grid"
+description: "Struggling with multi-line alignment in CSS? Discover the align-content property! Our guide shows you how to perfectly align lines in Flexbox and Grid for better layouts."
+pubDate: "Jan 14 2025"
+heroImage: "/post-css-align-content.webp"
+tags: ["CSS", "Flexbox", "CSSGrid"]
+# badge: "Demo badge"
+---
+
+# Mastering `align-content`: A CSS Guide for Multi-Line Alignment
+When working with CSS Flexbox or Grid Layout, you might encounter situations where your container has extra space in the cross-axis.  While `align-items` controls the alignment of items along the cross-axis within each line,  **`align-content`** steps in to manage the alignment of the lines themselves within the container.  This is particularly useful when you have a multi-line flex container or a grid with multiple row tracks.
+
+<p class="codepen" data-height="375" data-default-tab="css,result" data-slug-hash="qEWVQXr" data-pen-title="Untitled" data-user="BuiltInOneDay" style="height: 375px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/BuiltInOneDay/pen/qEWVQXr">
+  Untitled</a> by Anthony (<a href="https://codepen.io/BuiltInOneDay">@BuiltInOneDay</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
+
+### Understanding `align-content`
+`align-content` defines how the browser distributes space between and around lines of content along the flex container's cross-axis (or grid container's block axis). It only has an effect when there is more space in the cross-axis than needed to display the flex lines or grid tracks.
+
+### Key Differences: `align-items` vs. `align-content`
+
+It's crucial to distinguish `align-items` from `align-content`:
+
++ `align-items`: Aligns individual items within each flex line or grid area.
++ `align-content`: Aligns the lines of flex items or the tracks of a grid as a whole within the container.
+Think of `align-items` as aligning items inside each row, and `align-content` as aligning the rows themselves within the container.
+
+### Common `align-content` Values
+Let's explore the most common values for `align-content` with examples:
+
+`flex-start` (or `start`): Lines are packed at the start of the container.
+
+```
+CSS
+
+.container {
+  display: flex; /* or display: grid; */
+  flex-wrap: wrap; /* For flexbox to create multiple lines */
+  `align-content: flex-start; /* or `align-content: start; */
+  height: 200px; /* Ensure container has extra space */
+}
+```
+```
+HTML
+
+<div class="container">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+  <div>Item 5</div>
+</div>
+```
+*(In this example, all lines will be positioned at the top of the container.)*
+
+`flex-end` (or `end`): Lines are packed at the end of the container.
+
+```
+CSS
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end; /* or align-content: end; */
+  height: 200px;
+}
+```
+*(Lines will be positioned at the bottom of the container.)*
+
+`center`: Lines are centered in the container.
+
+```
+CSS
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  height: 200px;
+}
+```
+*(Lines will be vertically centered within the container.)*
+
+`space-between`:  The first line is at the start, the last line is at the end, and remaining space is distributed evenly between the lines.
+
+```
+CSS
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  height: 200px;
+}
+```
+*(Space is placed between the lines.)*
+
+`space-around`: Space is distributed evenly around each line, with equal space before the first line and after the last line.
+
+```
+CSS
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+  height: 200px;
+}
+```
+*(Space is placed around each line.)*
+
+`stretch`: Lines are stretched to fill the container. This is the default value.
+
+```
+CSS
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch; /* Default value */
+  height: 200px;
+}
+```
+*(Lines will expand to fill the available height of the container, if possible.)*
+
+When to Use `align-content`
+`align-content` is most effective when:
+
++ **Using Flexbox with `flex-wrap: wrap;` or Grid Layout:** It requires multiple lines or tracks to have something to align.
++ **The container has extra space in the cross-axis:** If the content already fills the cross-axis, `align-content` won't have a visible effect.
++ **You need to control the distribution of space between lines/tracks:** For example, to center a group of lines vertically or distribute them evenly within a container.
+
+### Conclusion
+`align-content` is a valuable CSS property for fine-tuning the layout of multi-line flex containers and grid layouts. By understanding its different values and how it interacts with available space, you can achieve more sophisticated and visually appealing designs. Experiment with these values to see how `align-content` can enhance your layouts!
+
+For more detailed information, refer to the [MDN documentation on `align-content`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content).
+
+#### Browser Support:
+
+import { BaselineStatus } from 'astro-embed';
+
+<BaselineStatus id="align-content-block" />

@@ -5,6 +5,7 @@ import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
 import ProjectsList from "../content/projects.astro";
 import Contact from "@components/Contact.astro";
+import { BaselineStatus } from 'astro-embed';
 
 // const projects = (await getCollection("projects")).reverse();
 const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
