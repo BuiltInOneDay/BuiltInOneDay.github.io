@@ -4,7 +4,7 @@ description: "Epro, a valued client, approached us with a challenge: revitalize 
 pubDate: "Jan 15 2025"
 heroImage: "/post-img-epro-newsletter.jpg"
 tags: ["Emails", "Hubspot"]
-badge: "Design"
+badge: "Case Study"
 ---
 
 ### Creating a new design for Epro Newsletter
