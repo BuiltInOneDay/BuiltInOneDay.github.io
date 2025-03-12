@@ -9,6 +9,7 @@ body {
 
 .avatar {
     background-image: linear-gradient(to right, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    /* border-image: linear-gradient(to right, #6366f1,#ec4899) 1; */
     border-radius: 100%;
     padding: 3px;
 }
