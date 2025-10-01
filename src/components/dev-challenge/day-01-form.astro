@@ -1,0 +1,244 @@
+---
+
+---
+
+<form id="contact-form" class="glass" method="POST" action="" novalidate aria-label="Contact Form">
+	<div>
+		<h3>Contact Us</h3>
+	</div>
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" id="name" name="name" required minlength="2" autocomplete="given-name" placeholder="First Last">
+		<span class="error-message" id="name-error" aria-live="polite"></span>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input type="email" class="form-control" id="email" name="email" required autocomplete="email" placeholder="your@email.com">
+		<span class="error-message" id="email-error" aria-live="polite"></span>
+	</div>
+
+	<div class="form-group hp-field">
+		<label for="website">Website</label>
+		<input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+	</div>
+
+	<div class="form-group">
+		<label for="message">Message</label>
+		<textarea class="form-control" id="message" name="message" rows="4" required minlength="10"></textarea>
+		<span class="error-message" id="message-error" aria-live="polite"></span>
+	</div>
+
+	<div class="md:flex align-middle md:justify-between">
+		<button type="submit" class="btn w-full md:w-auto hover:darken-90">Submit</button>
+		<div class="cf-turnstile mt-5 md:mt-0" data-sitekey="0x4AAAAAAB4ZAfivefy01pZM"></div>
+		<!-- <div class="cf-turnstile" data-sitekey="1x00000000000000000000BB"></div> -->
+	</div>
+</form>
+
+<!-- Thank You message container, hidden by default -->
+<div id="thank-you-message" style="display: none;">
+	<h2>Thank you for your message!</h2>
+	<p>This is just a test form and does not work.  Please use the form on the homepage.</p>
+</div>
+
+
+<style>
+	:root {
+		--primary: #000000;
+		--secondary: #FFFFFF;
+		--error: #FF5E5B;
+		--shadow: 8px 8px 0px var(--primary);
+	}
+
+	#contact-form {
+		font-family: 'Courier New', monospace;
+		width: 100%;
+		/* max-width: 600px; */
+		margin: 0 auto;
+		padding: 20px;
+		border: 1px solid var(--primary);
+		border-radius: 1rem;
+		box-shadow: var(--shadow);
+	}
+
+	h3 {
+		color: var(--primary);
+		margin-bottom: 30px;
+		font-size: 28px;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+	label {
+		display: block;
+		margin-bottom: 5px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	textarea {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid var(--primary);
+		border-radius: 5px;
+		box-sizing: border-box; /* Ensures padding doesn't increase total width */
+	}
+
+	input:focus,
+	textarea:focus {
+		border-color: #2364d2;
+		outline: none;
+		box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+	}
+
+	.error-message {
+		color: var(--error);
+		font-size: 0.875rem;
+		margin-top: 5px;
+		display: none; /* Hidden by default */
+	}
+
+	input.invalid,
+	textarea.invalid {
+		border-color: var(--error);
+	}
+
+	button[type="submit"] {
+		background-color: #FF7F50;
+		color: white;
+		padding: 10px 25px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 1.2em;
+		text-transform: uppercase;
+		border: 1px solid var(--primary);
+	}
+
+	button[type="submit"]:hover {
+		background-color: #E25822;
+	}
+
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		top: -9999px;
+		opacity: 0;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+
+	#thank-you-message {
+		text-align: center;
+		padding: 2rem;
+		border: 2px solid #28a745;
+		border-radius: 4px;
+		background-color: #d4edda;
+		color: #155724;
+	}
+
+	#thank-you-message h2 {
+		color: #155724;
+		margin-bottom: 0.5rem;
+	}
+
+</style>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
+<script>
+	document.getElementById("contact-form")?.addEventListener("submit", function (event) {
+		// Stop the browser's default form submission behavior
+  		event.preventDefault();
+
+		const nameInput = document.getElementById("name") as HTMLInputElement;
+		const emailInput = document.getElementById("email") as HTMLInputElement;
+		const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+		const nameError = document.getElementById("name-error");
+		const honeypotInput = document.getElementById('website') as HTMLInputElement; // Get the honeypot field
+		if (!nameInput || !emailInput || !messageInput || !nameError) return;
+		let isValid = true;
+
+		// Clear previous error messages
+		document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+
+		// SPAM PROTECTION: If the honeypot field is filled, it's a bot.
+		if (honeypotInput.value !== '') {
+			console.warn('Bot detected via honeypot field.');
+			return; // Silently exit without showing an error or submitting
+		}
+
+		// ... (validation for name and email fields)
+		if (nameInput.value.trim().length < 2) {
+			displayError(nameInput, 'Name must be at least 2 characters long.');
+			isValid = false;
+		} else {
+			clearError(nameInput);
+		}
+
+		if (!isValidEmail(emailInput.value)) {
+			displayError(emailInput, 'Please enter a valid email address.');
+			isValid = false;
+		} else {
+			clearError(emailInput);
+		}
+
+		// Custom validation for the message field
+		if (messageInput.value.trim() === '') {
+			displayError(messageInput, 'Message cannot be empty.');
+			isValid = false;
+		} else if (messageInput.value.trim().length < 10) {
+			displayError(messageInput, 'Message must be at least 10 characters long.');
+			isValid = false;
+		} else {
+			clearError(messageInput);
+		}
+
+		// If all fields are valid, hide the form and show the thank you message
+		if (isValid) {
+			// Hide the form
+			(document.getElementById("contact-form") as HTMLFormElement).style.display = 'none';
+			// Show the thank you message
+			(document.getElementById("thank-you-message") as HTMLDivElement).style.display = 'block';
+			// Optionally, you can also reset the form fields
+			document.getElementById("contact-form").reset();
+		}
+		
+	});
+
+	function isValidEmail(email) {
+		// Simple regex for email validation
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
+
+	function displayError(inputElement, message) {
+		const errorElement = document.getElementById(`${inputElement.id}-error`);
+		if (errorElement) {
+			errorElement.textContent = message;
+			errorElement.style.display = 'block';
+			inputElement.classList.add('invalid');
+		}
+	}
+
+	function clearError(inputElement) {
+		const errorElement = document.getElementById(`${inputElement.id}-error`);
+		if (errorElement) {
+			errorElement.textContent = '';
+			errorElement.style.display = 'none';
+			inputElement.classList.remove('invalid');
+		}
+	}
+</script>

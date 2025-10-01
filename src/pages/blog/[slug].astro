@@ -1,6 +1,7 @@
 ---
-import { CollectionEntry, getCollection } from "astro:content";
-import { BlogSchema } from "../../content/config";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import type { BlogSchema } from "../../content/config";
 import PostLayout from "../../layouts/PostLayout.astro";
 import createSlug from "../../lib/createSlug"
 

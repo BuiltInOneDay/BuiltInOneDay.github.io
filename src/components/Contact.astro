@@ -56,7 +56,12 @@
         Please enter your message.
       </div>
     </div>
-    <button class="btn [border-image:linear-gradient(to_right,#6366f1,#ec4899)_1] border-2" type="submit">Send Message</button>
+
+    <div class="flex align-middle justify-between">
+      <button class="btn [border-image:linear-gradient(to_right,#6366f1,#ec4899)_1] border-2" type="submit">Send Message</button>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAB4ZAfivefy01pZM"></div>
+    </div>
+
     <div id="result" class="mt-3 text-center"></div>
   </form>
 
@@ -79,6 +84,12 @@
     border-color: #dc3545;
   }
 </style>
+
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
 
 <script is:inline>
 
