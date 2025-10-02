@@ -24,6 +24,7 @@
 		name="access_key"
 		value="ef22ad28-3392-4f44-8ffe-d1b4977dc66d"
 	/>
+	<input type="hidden" name="subject" value="New Contact Form Submission from anthonyellsworth.dev" />
 
 	<input
 		type="checkbox"
@@ -38,7 +39,7 @@
 			placeholder="Full Name"
 			required
 			class="w-full px-4 py-3 border placeholder:text-slate-400 rounded-md outline-none focus:ring-4 border-slate-300 focus:border-slate-600 ring-slate-100"
-			name="name"
+			name="fullname"
 		/>
 		<div class="empty-feedback invalid-feedback text-red-400 text-sm mt-1">
 			Please provide your full name.
@@ -77,7 +78,6 @@
 			class="btn [border-image:linear-gradient(to_right,#6366f1,#ec4899)_1] border-2"
 			type="submit">Send Message</button
 		>
-		<div class="cf-turnstile" data-sitekey="0x4AAAAAAB4ZAfivefy01pZM"></div>
 	</div>
 
 	<div id="result" class="mt-3 text-center"></div>
@@ -103,63 +103,340 @@
 	}
 </style>
 
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer
-></script>
-
 <script is:inline>
 	// use astro:page-load event if you are using View Transitions
 
-	document.addEventListener(
-		"DOMContentLoaded",
-		() => {
-			const form = document.getElementById("form");
-			const result = document.getElementById("result");
+	document.addEventListener("DOMContentLoaded",() => {
+		const form = document.getElementById("form");
+		const result = document.getElementById("result");
 
-			form.addEventListener("submit", function (e) {
-				e.preventDefault();
-				form.classList.add("was-validated");
-				if (!form.checkValidity()) {
-					form.querySelectorAll(":invalid")[0].focus();
-					return;
+		form.addEventListener("submit", function (e) {
+			// Stop the browser's default form submission behavior
+			e.preventDefault();
+			form.classList.add("was-validated");
+			if (!form.checkValidity()) {
+				form.querySelectorAll(":invalid")[0].focus();
+				return;
+			}
+
+			const formData = new FormData(form);
+			const object = Object.fromEntries(formData);
+			const json = JSON.stringify(object);
+
+			result.innerHTML = "Sending...";
+
+			fetch("https://api.web3forms.com/submit", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: json,
+			})
+			.then(async (response) => {
+				let json = await response.json();
+				if (response.status == 200) {
+					result.classList.add("text-green-500");
+					result.innerHTML = json.message;
+				} else {
+					console.log(response);
+					result.classList.add("text-red-500");
+					result.innerHTML = json.message;
 				}
-				const formData = new FormData(form);
-				const object = Object.fromEntries(formData);
-				const json = JSON.stringify(object);
+			})
+			.catch((error) => {
+				console.log(error);
+				result.innerHTML = "Something went wrong!";
+			})
+			.then(function () {
+				form.reset();
+				form.classList.remove("was-validated");
+				setTimeout(() => {
+					result.style.display = "none";
+				}, 5000);
+			});
+		});
+	}, { once: true },
+	);
+</script>
 
-				result.innerHTML = "Sending...";
 
-				fetch("https://api.web3forms.com/submit", {
+
+
+<!-- <form id="contact-form" class="glass" method="POST" action="https://api.web3forms.com/submit" novalidate aria-label="Contact Form">
+	<div>
+		<h3>Contact Me</h3>
+	</div> -->
+
+	<!-- Add your Web3Forms Access Key -->
+	<!-- <input
+		type="hidden"
+		name="access_key"
+		value="ef22ad28-3392-4f44-8ffe-d1b4977dc66d"
+	/>
+	<input type="hidden" name="subject" value="New Contact Form Submission from Web3Forms" />
+    <input type="hidden" name="from_name" value="anthonyellsworth.dev" />
+	
+	<div class="form-group">
+		<label for="name">Name</label>
+		<input type="text" class="form-control" id="name" name="name" required minlength="2" autocomplete="given-name" placeholder="First Last">
+		<span class="error-message" id="name-error" aria-live="polite"></span>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Email</label>
+		<input type="email" class="form-control" id="email" name="email" required autocomplete="email" placeholder="your@email.com">
+		<span class="error-message" id="email-error" aria-live="polite"></span>
+	</div>
+
+	<div class="form-group hp-field">
+		<label for="website">Website</label>
+		<input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+	</div>
+
+	<div class="form-group">
+		<label for="message">Message</label>
+		<textarea class="form-control" id="message" name="message" rows="4" required minlength="10"></textarea>
+		<span class="error-message" id="message-error" aria-live="polite"></span>
+	</div>
+
+	<div class="md:flex align-middle md:justify-between">
+		<button type="submit" class="btn w-full md:w-auto hover:darken-90">Submit</button>
+		<div class="cf-turnstile mt-5 md:mt-0" data-sitekey="0x4AAAAAAB4ZAfivefy01pZM"></div>
+	</div>
+</form> -->
+
+<!-- Thank You message container, hidden by default -->
+<!-- <div id="thank-you-message" style="display: none;">
+	<h2>Thank you for your message!</h2>
+	<p>This is just a test form and does not work.  Please use the form on the homepage.</p>
+</div> -->
+
+
+<!-- <style>
+	:root {
+		--primary: #000000;
+		--secondary: #FFFFFF;
+		--error: #FF5E5B;
+		--shadow: 8px 8px 0px var(--primary);
+	}
+
+	#contact-form {
+		font-family: 'Courier New', monospace;
+		width: 100%;
+		/* max-width: 600px; */
+		margin: 0 auto;
+		padding: 20px;
+		border: 1px solid var(--primary);
+		border-radius: 1rem;
+		box-shadow: var(--shadow);
+	}
+
+	h3 {
+		color: var(--primary);
+		margin-bottom: 30px;
+		font-size: 28px;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+	label {
+		display: block;
+		margin-bottom: 5px;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	textarea {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid var(--primary);
+		border-radius: 5px;
+		box-sizing: border-box; /* Ensures padding doesn't increase total width */
+	}
+
+	input:focus,
+	textarea:focus {
+		border-color: #2364d2;
+		outline: none;
+		box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+	}
+
+	.error-message {
+		color: var(--error);
+		font-size: 0.875rem;
+		margin-top: 5px;
+		display: none; /* Hidden by default */
+	}
+
+	input.invalid,
+	textarea.invalid {
+		border-color: var(--error);
+	}
+
+	button[type="submit"] {
+		background-color: #FF7F50;
+		color: white;
+		padding: 10px 25px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 1.2em;
+		text-transform: uppercase;
+		border: 1px solid var(--primary);
+	}
+
+	button[type="submit"]:hover {
+		background-color: #E25822;
+	}
+
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		top: -9999px;
+		opacity: 0;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+
+	#thank-you-message {
+		text-align: center;
+		padding: 2rem;
+		border: 2px solid #28a745;
+		border-radius: 4px;
+		background-color: #d4edda;
+		color: #155724;
+	}
+
+	#thank-you-message h2 {
+		color: #155724;
+		margin-bottom: 0.5rem;
+	}
+</style>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+	// Moved to the top for better script flow
+	const form = document.getElementById("contact-form") as HTMLFormElement;
+	const submitButton = document.getElementById("submit-button") as HTMLButtonElement;
+	const thankYouMessage = document.getElementById("thank-you-message") as HTMLDivElement;
+	const honeypotInput = document.getElementById('website') as HTMLInputElement;
+
+	// Function to get the Turnstile token
+	function getTurnstileToken() {
+		return (document.querySelector('input[name="cf-turnstile-response"]') as HTMLInputElement)?.value;
+	}
+
+	function isValidEmail(email) {
+		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(String(email).toLowerCase());
+	}
+
+	function displayError(inputElement, message) {
+		const errorElement = document.getElementById(`${inputElement.id}-error`);
+		if (errorElement) {
+			errorElement.textContent = message;
+			errorElement.style.display = 'block';
+			inputElement.classList.add('invalid');
+		}
+	}
+
+	function clearError(inputElement) {
+		const errorElement = document.getElementById(`${inputElement.id}-error`);
+		if (errorElement) {
+			errorElement.textContent = '';
+			errorElement.style.display = 'none';
+			inputElement.classList.remove('invalid');
+		}
+	}
+
+	form?.addEventListener("submit", async function (event) {
+		event.preventDefault();
+
+		// Basic element checks
+		const nameInput = document.getElementById("name") as HTMLInputElement;
+		const emailInput = document.getElementById("email") as HTMLInputElement;
+		const messageInput = document.getElementById("message") as HTMLTextAreaElement;
+		if (!nameInput || !emailInput || !messageInput) return;
+		
+		let isValid = true;
+		
+		// Clear previous error messages
+		document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+
+		// Check honeypot field
+		if ((honeypotInput as HTMLInputElement)?.value !== '') {
+			console.warn('Bot detected via honeypot field.');
+			return;
+		}
+
+		// Client-side validation
+		if (nameInput.value.trim().length < 2) {
+			displayError(nameInput, 'Name must be at least 2 characters long.');
+			isValid = false;
+		} else {
+			clearError(nameInput);
+		}
+
+		if (!isValidEmail(emailInput.value)) {
+			displayError(emailInput, 'Please enter a valid email address.');
+			isValid = false;
+		} else {
+			clearError(emailInput);
+		}
+
+		if (messageInput.value.trim().length < 10) {
+			displayError(messageInput, 'Message must be at least 10 characters long.');
+			isValid = false;
+		} else {
+			clearError(messageInput);
+		}
+
+		const turnstileToken = getTurnstileToken();
+		if (!turnstileToken) {
+			console.warn('Turnstile token not found.');
+			isValid = false;
+		}
+
+		if (isValid) {
+			submitButton?.setAttribute('disabled', 'true');
+
+			const formData = new FormData(form);
+			const object = Object.fromEntries(formData.entries());
+			
+			try {
+				const response = await fetch(form.action, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						Accept: "application/json",
+						"Accept": "application/json",
 					},
-					body: json,
-				})
-					.then(async (response) => {
-						let json = await response.json();
-						if (response.status == 200) {
-							result.classList.add("text-green-500");
-							result.innerHTML = json.message;
-						} else {
-							console.log(response);
-							result.classList.add("text-red-500");
-							result.innerHTML = json.message;
-						}
-					})
-					.catch((error) => {
-						console.log(error);
-						result.innerHTML = "Something went wrong!";
-					})
-					.then(function () {
-						form.reset();
-						form.classList.remove("was-validated");
-						setTimeout(() => {
-							result.style.display = "none";
-						}, 5000);
-					});
-			});
-		},
-		{ once: true },
-	);
-</script>
+					body: JSON.stringify(object),
+				});
+				
+				if (response.status === 200) {
+					form.style.display = 'none';
+					thankYouMessage.style.display = 'block';
+					form.reset();
+				} else {
+					const json = await response.json();
+					console.error("Web3Forms error:", json.message);
+					alert("There was an error with your submission. Please try again.");
+				}
+			} catch (error) {
+				console.error("Fetch error:", error);
+				alert("Something went wrong with the network. Please try again");
+			} finally {
+				submitButton.disabled = false;
+			}
+		}
+	});
+</script> -->
