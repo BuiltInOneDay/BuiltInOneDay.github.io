@@ -1,0 +1,253 @@
+---
+
+---
+
+<div class="calculator">
+    <div class="display">
+        <div data-previous-operand class="previous-operand"></div>
+        <div data-current-operand class="current-operand">0</div>
+    </div>
+    <button data-all-clear class="span-two">AC</button>
+    <button data-delete>DEL</button>
+    <button data-operation class="btnColor">÷</button>
+    <button data-number>1</button>
+    <button data-number>2</button>
+    <button data-number>3</button>
+    <button data-operation class="btnColor">x</button>
+    <button data-number>4</button>
+    <button data-number>5</button>
+    <button data-number>6</button>
+    <button data-operation class="btnColor">+</button>
+    <button data-number>7</button>
+    <button data-number>8</button>
+    <button data-number>9</button>
+    <button data-operation class="btnColor">-</button>
+    <button data-number>.</button>
+    <button data-number>0</button>
+    <button data-equals class="span-two btnColor">=</button>
+</div>
+
+<style>
+    *, *::before, *::after {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: normal;
+    }
+
+    :root {
+        --orange: #e5383b;
+        --orangeHover: #ba181b;
+        --grey: #d3d3d3
+    }
+
+    .calculator {
+        display: grid;
+        grid-template-columns: repeat(4, 100px);
+        grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+        background-color: #f3f3f3;  
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        overflow: hidden; /* Ensure border-radius applies to contents */
+        width: fit-content; /* Makes it not stretch */
+        margin: 0 auto; /* Center horizontally */
+    }
+    .calculator > button {
+        font-size: 2rem;
+        border: 1px solid #999;
+        background-color: rgba(255, 255, 255, .75);
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.1s ease-in-out;
+    }
+    .calculator > button:hover {
+        background-color: #f5f3f4;
+    }
+
+    .calculator > button[data-operation] {
+        /* background-color: var(--orange);
+        color: white; */
+        color: var(--orange);
+    }
+    /* .calculator > button[data-operation]:hover {
+        background-color: var(--orangeHover);
+    } */
+    .calculator > button[data-all-clear],
+    .calculator > button[data-delete] {
+        background-color: var(--grey);
+        color: #161a1d;
+    }
+    .calculator > button[data-all-clear]:hover,
+    .calculator > button[data-delete]:hover {
+        background-color: #f5f3f4;
+    }
+    .calculator > button[data-equals] {
+        background-color: var(--orange);
+        color: white;
+    }
+    .calculator > button[data-equals]:hover {
+        background-color: var(--orangeHover);
+    }
+
+    .span-two {
+        grid-column: span 2;
+    }
+
+    .display {
+        grid-column: 1 / -1;
+        background-color: #222;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-around;
+        padding: 10px;
+        word-wrap: break-word;
+        word-break: break-all;
+        border-bottom: 2px solid #555;
+        color: white;
+    }
+
+    .display .previous-operand {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.75);
+    }
+    .display .current-operand {
+        font-size: 2.5rem;
+    }
+    
+</style>
+
+<script>
+    class Calculator {
+        private previousOperandTextElement: HTMLElement;
+        private currentOperandTextElement: HTMLElement;
+        private currentOperand: string;
+        private previousOperand: string;
+        private operation: string | undefined;
+
+        constructor(previousOperandTextElement: HTMLElement, currentOperandTextElement: HTMLElement) {
+            this.previousOperandTextElement = previousOperandTextElement;
+            this.currentOperandTextElement = currentOperandTextElement;
+            this.clear();
+        }
+        
+        clear() {
+            this.currentOperand = '0';
+            this.previousOperand = '';
+            this.operation = undefined;
+        }
+
+        delete() {
+            this.currentOperand = this.currentOperand.toString().slice(0,-1);
+            this.clear();
+        }
+
+        appendNumber(number) {
+            if (number === '.' && this.currentOperand.includes('.')) return;
+            this.currentOperand = this.currentOperand.toString() + number.toString();
+        }
+
+        chooseNumber(operation) {
+            if (this.currentOperand === '') return;
+            if (this.previousOperand !== '') {
+                this.compute();
+            }
+            this.operation = operation;
+            this.previousOperand = this.currentOperand;
+            this.currentOperand = '';
+        }
+
+        compute() {
+            let computation;
+            const prev = parseFloat(this.previousOperand);
+            const current = parseFloat(this.currentOperand);
+            if(isNaN(prev) || isNaN(current)) return;
+            switch (this.operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '-':
+                    computation = prev - current;
+                    break;
+                case 'x':
+                    computation = prev * current;
+                    break;
+                case '÷':
+                    computation = prev / current;
+                    break;
+                default:
+                    return; 
+            }
+            this.currentOperand = computation;
+            this.operation = undefined;
+            this.previousOperand = '';
+        }
+
+        getDisplayNumber(number) {
+            const stringNumber = number.toString();
+            const integerDigits = parseFloat(stringNumber.split('.')[0]);
+            const decimalDigits = stringNumber.split('.')[1];
+            let integerDisplay;
+            if(isNaN(integerDigits)) {
+                integerDisplay = '';
+            } else {
+                integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0});
+            }
+            if (decimalDigits != null) {
+                return `${integerDigits}.${decimalDigits}`;
+            } else {
+                return integerDisplay;
+            }
+        }
+
+        updateDisplay() {
+            this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
+            if (this.operation != null) {
+                this.previousOperandTextElement.innerText = 
+                    `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
+            } else {
+                this.previousOperandTextElement.innerText = '';
+            }
+        }
+    }
+
+// Select all buttons using their data attributes
+const numberButtons = document.querySelectorAll('[data-number]');
+const operationButtons = document.querySelectorAll('[data-operation]');
+const equalsButton = document.querySelector('[data-equals]');
+const deleteButton = document.querySelector('[data-delete]');
+const allClearButton = document.querySelector('[data-all-clear]');
+const previousOperandTextElement = document.querySelector('[data-previous-operand]') as HTMLButtonElement;
+const currentOperandTextElement = document.querySelector('[data-current-operand]') as HTMLButtonElement;
+
+const calculator = new Calculator(previousOperandTextElement!, currentOperandTextElement!);
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.appendNumber((button as HTMLButtonElement).innerText);
+        calculator.updateDisplay();
+    });
+});
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseNumber((button as HTMLButtonElement).innerText);
+        calculator.updateDisplay();
+    });
+});
+
+equalsButton?.addEventListener('click', button => {
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+allClearButton?.addEventListener('click', button => {
+    calculator.clear();
+    calculator.updateDisplay();
+});
+
+deleteButton?.addEventListener('click', button => {
+    calculator.delete();
+    calculator.updateDisplay(); 
+});
+
+</script>
