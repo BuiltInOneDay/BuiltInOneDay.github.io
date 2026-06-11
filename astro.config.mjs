@@ -1,17 +1,19 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://anthonyellsowrth.dev',
   base: '/',
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
     mdx(), 
     sitemap(), 
-    tailwind(),
     partytown({
       config: {
         forward: ["dataLayer.push"],

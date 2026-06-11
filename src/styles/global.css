@@ -1,3 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  logs: false;
+}
+@plugin "@tailwindcss/typography";
+
 html {
     scroll-behavior: smooth;
 }
